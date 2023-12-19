@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+    <t t-name="EmployeeDashboard" owl="1">
+        <div class="vh-100 overflow-auto bg-muted"
+             style="background-image: linear-gradient(120deg, #e0c3fc 0%, #8ec5fc 100%);">
+            <div class="row m-3">
+                <div class="col-lg-13">
+                    <div class="row">
+                        <div class="col m-0 p-0">
+                            <div class="shadow-sm border m-2 p-4 bg-white"
+                                 style="border-radius: 25px;">
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <h1 class="text-primary fw-bold">Employee Dashboard</h1>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-5">
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Employee Experience</h3>
+                        </div>
+                        <canvas t-ref="EmployeeExperience"/>
+                    </div>
+                </div>
+
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Employee Leave</h3>
+                        </div>
+                        <canvas t-ref="EmployeeLeave"/>
+                    </div>
+                </div>
+
+            </div>
+            <div class="row m-5">
+
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Employee Attendance</h3>
+                        </div>
+                        <canvas t-ref="EmployeeAttendance"/>
+                    </div>
+                </div>
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Employee Projects</h3>
+                        </div>
+                        <canvas t-ref="EmployeeProjects"/>
+                    </div>
+                </div>
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Employee Tasks</h3>
+                        </div>
+                        <canvas t-ref="EmployeeTasks"/>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row m-5">
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-4 bg-white"
+                         style="border-radius: 15px">
+                        <div class="d-flex align-items-center justify-content-between">
+                            <h3 class="text-primary fw-bold">Employee Payslip</h3>
+                        </div>
+                        <canvas t-ref="EmployeePayslip"/>
+                    </div>
+                </div>
+
+
+                <div class="col m-0 p-0">
+                    <div class="shadow-sm border m-2 p-5 bg-white"
+                         style="border-radius: 15px; width: 575px;height:341px;">
+                        <div class="d-flex align-items-center justify-content-between"
+                             style="padding: 10px; border-radius: 15px 15px 0 0;">
+                            <h3 class="text-primary fw-bold">Personal Information</h3>
+                        </div>
+                        <div style="padding: 10px; font-size:17px">
+                            <b>Name : </b>
+                            <span t-esc="state.data.name"/>
+                        </div>
+                        <div style="padding: 10px; font-size:17px;">
+                            <b>Phone : </b>
+                            <t t-esc="state.data.phone"/>
+                        </div>
+                        <div style="padding: 10px; font-size:17px;">
+                            <b>Email : </b>
+                            <t t-esc="state.data.email"/>
+                        </div>
+                        <div style="padding: 10px; font-size:17px;">
+                            <b>Department : </b>
+                            <t t-esc="state.data.department"/>
+                        </div>
+                        <div style="padding: 10px; font-size:17px;">
+                            <b>Job : </b>
+                            <t t-esc="state.data.job"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </t>
+</templates>
