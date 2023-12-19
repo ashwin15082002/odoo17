@@ -15,12 +15,10 @@ class EmployeeDashboard(models.Model):
         end_date = Date.today()
         if date_count == '30':
             start_date = end_date - timedelta(days=30)
-            print(start_date)
             res = self.get_data(start_date)
             return res
         else:
             start_date = end_date - timedelta(days=7)
-            print(start_date)
             res = self.get_data(start_date)
             return res
 
