@@ -11,6 +11,13 @@
                                  style="border-radius: 25px;">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <h1 class="text-primary fw-bold">Employee Dashboard</h1>
+                                    <div>
+                                        <select class="form-select" t-model="state.period"
+                                                t-on-change="onPeriodChange">
+                                            <option value="7">Last 7 Days</option>
+                                            <option value="30">Last 30 Days</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>

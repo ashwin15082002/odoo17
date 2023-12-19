@@ -9,13 +9,27 @@ class EmployeeDashboard(models.Model):
     _name = 'employee.dashboard'
 
     @api.model
-    def get_data(self):
+    def get_datas(self, date):
         """ This function is used to get datas for chart and return the datas into dashboard_employee.js file"""
+        date_count = date
+        end_date = Date.today()
+        if date_count == '30':
+            start_date = end_date - timedelta(days=30)
+            print(start_date)
+            res = self.get_data(start_date)
+            return res
+        else:
+            start_date = end_date - timedelta(days=7)
+            print(start_date)
+            res = self.get_data(start_date)
+            return res
+
+    def get_data(self, start_date):
         user = self.env['hr.employee'].search([('user_id', '=', self.env.user.id)])
 
         # get employee leave data
 
-        leaves = self.env['hr.leave'].search([])
+        leaves = self.env['hr.leave'].search([('date_from', '>', start_date)])
         employee_leave = []
         employee_leave_count = []
         for employee in leaves:
@@ -33,7 +47,7 @@ class EmployeeDashboard(models.Model):
 
         # get employee attendance data
 
-        attendance = self.env['hr.attendance'].sudo().search([])
+        attendance = self.env['hr.attendance'].sudo().search([]).filtered(lambda x: x.check_in.date() > start_date)
         attendance_employee = list(set([record.employee_id.name
                                         for record in attendance]))
 
@@ -47,7 +61,7 @@ class EmployeeDashboard(models.Model):
 
         # get employee project data
 
-        project = self.env['project.project'].sudo().search([])
+        project = self.env['project.project'].sudo().search([('date_start', '>', start_date)])
         project_manager = list(set([pro.user_id.name for pro in project]))
         project_count = []
         for record in project_manager:
@@ -71,7 +85,7 @@ class EmployeeDashboard(models.Model):
 
         # get employee payslip data
 
-        payslips = self.env['hr.payslip'].sudo().search([])
+        payslips = self.env['hr.payslip'].sudo().search([]).filtered(lambda x: x.create_date.date() > start_date)
         payslip_employee = list(set([rec.employee_id.name for rec in payslips]))
 
         payslip_line = [self.env['hr.payslip.line'].sudo().search([

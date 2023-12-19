@@ -8,6 +8,7 @@ export class EmployeeDashboard extends Component {
     setup(){
         this.state = useState({
             data:{},
+            period:7,
             chart:[],
         })
         this.EmployeeLeave = useRef("EmployeeLeave"),
@@ -23,9 +24,19 @@ export class EmployeeDashboard extends Component {
             await this.FetchData();
         })
     }
+    async onPeriodChange(){
+        if (this.state.chart.length !=0) {
+            this.state.chart.forEach((chart)=> {
+                chart.destroy()
+            })
+            this.FetchData()
+        }
+    }
 
     async FetchData(){
-        this.state.data = await this.orm.call("employee.dashboard", "get_data")
+        const date = this.state.period
+        console.log(date)
+        this.state.data = await this.orm.call("employee.dashboard", "get_datas", [date])
         console.log(this.state.data)
         this.charts(this.EmployeeLeave.el,'line',this.state.data.employee,'Employee Leave',this.state.data.leave_count)
         this.charts(this.EmployeeExperience.el,'line',this.state.data.employee_exp,'Year Of Experience',this.state.data.employee_experience)
@@ -34,6 +45,7 @@ export class EmployeeDashboard extends Component {
         this.charts(this.EmployeeTasks.el,'polarArea',this.state.data.task_x,'Tasks',this.state.data.task_y)
         this.charts(this.EmployeePayslip.el,'bar',this.state.data.payslip_x,'Amount',this.state.data.payslip_y)
     }
+
 
     charts(canvas,type,labels,label,data){
         this.state.chart.push(new Chart(
